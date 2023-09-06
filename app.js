@@ -39,6 +39,7 @@ const LinkedList = () => {
     const append = (value) => {
 
         let tailNode = newList.tail()
+        console.log(tailNode)
         tailNode.nextNode = node(value)
 
         //console.log(newNode)
@@ -55,11 +56,34 @@ const LinkedList = () => {
         // }
     };
 
+    const prepend = (value) => {    // adds a new node containing value to the start of the list
+        return newNode = node(value, head())
+    }
+
+    const pop = () => {     // removes the last element from the list
+
+        let tail = newList.tail()
+        //delete tail.value 
+       // tail.nextNode = null
+        tail = null
+        // must be an object that contains a nextNode set to null
+
+        // tail = newList.tail()
+        // tail.nextNode = null
+
+        
+        // if ( newNode.nextNode === null ) {
+        //     delete newNode
+        // } else {
+        //     newNode = newNode.nextNode
+        //     return pop(newNode)
+        // }
+    }    
+
     const tail = (copy = newNode) =>  {   // returns the last node in the list
     
         //   console.log(copy)
         // let copy = newNode
-
         // while (copy) {
         //     console.log(copy.value)
         //     copy = copy.nextNode
@@ -77,43 +101,19 @@ const LinkedList = () => {
         }
     }
 
-    // const tail = (test = newNode) =>  {   // returns the last node in the list
-    //     //   console.log(test)
-    //        // let copy = newNode
-   
-    //        // while (copy) {
-    //        //     console.log(copy.value)
-    //        //     copy = copy.nextNode
-    //        // }
-    //        if (test === newNode) {
-    //        //    console.log("match")
-    //            let test = newNode
-    //        //    console.log(test.nextNode)
-    //        } 
-   
-    //            if ( test.nextNode === null ) {
-    //             //   console.log("null")
-    //                return test
-    //            } else {
-    //              //  console.log(test)
-    //                test = test.nextNode
-    //             //   console.log(test)
-    //                return tail(test)
-    //            }
-           
-    //    }
+    const head = () => {    // returns the first node in the list
+        return newNode
+    }
 
     const log = () => console.log(newNode);
         
+    return { append, log, tail, head, prepend, pop, newNode };
 
-    return { append, log, tail, newNode };
-
-    // const prepend = (value) => {}
+    
     // const size = () => {}
-    // const head = () => {}
     // const tail = () => {}
     // const at = (index) => {}
-    // const pop = () => {}
+    // 
     // const contains = (value) => {}
     // const find = (value) => {}
     // const toString = () => {}
