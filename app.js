@@ -7,34 +7,14 @@ const LinkedList = () => {
         nextNode: {
             value: 2,
             nextNode: {
-              value: 3,
-              nextNode: {
-                value: 4,
-                nextNode: null
-              }
+                value: 3,
+                nextNode: {
+                    value: 4,
+                    nextNode: null
+                }
             }
-          }
-      };
-
-
-    //let newNode = node("head")
-    // { value: null, nextNode: null }
-
-    // const append = (value) => {
-    //     console.log(newNode)
-    //     if ( newNode.value === null ) {
-            
-    //      //   console.log(newNode)
-    //         return newNode = node(value)
-    //     } else {
-
-
-    //        return append(newNode.nextNode)
-    //        //newNode.nextNode = node(value)
-    //        // console.log(newNode)
-           
-    //     }
-    // };
+        }
+    };
 
     const append = (value) => {
 
@@ -42,52 +22,26 @@ const LinkedList = () => {
         console.log(tailNode)
         tailNode.nextNode = node(value)
 
-        //console.log(newNode)
-        // if ( newNode.value === null) {
-        //     newNode = node(value)
-        //     return newNode
-        // } 
-        // else {
-        //      newNode.nextNode = node(value)
-        //      return newNode.nextNode
-        // }
-        //     //newNode.nextNode = node(value)
-        //     // console.log(newNode) 
-        // }
     };
 
     const prepend = (value) => {    // adds a new node containing value to the start of the list
         return newNode = node(value, head())
-    }
+    };
 
-    const pop = () => {     // removes the last element from the list
-
-        let tail = newList.tail()
-        //delete tail.value 
-       // tail.nextNode = null
-        tail = null
-        // must be an object that contains a nextNode set to null
-
-        // tail = newList.tail()
-        // tail.nextNode = null
-
-        
-        // if ( newNode.nextNode === null ) {
-        //     delete newNode
-        // } else {
-        //     newNode = newNode.nextNode
-        //     return pop(newNode)
-        // }
-    }    
+    const pop = (copy = newNode) =>  {   // removes the last element from the list
+      
+        if (copy === newNode) {
+            let copy = newNode
+        }
+        if ( copy.nextNode.nextNode === null ) {
+            return copy
+        } else {
+            copy = copy.nextNode.nextNode
+            return pop(copy)
+        }
+    };
 
     const tail = (copy = newNode) =>  {   // returns the last node in the list
-    
-        //   console.log(copy)
-        // let copy = newNode
-        // while (copy) {
-        //     console.log(copy.value)
-        //     copy = copy.nextNode
-        // }
 
         if (copy === newNode) {
             let copy = newNode
@@ -99,39 +53,61 @@ const LinkedList = () => {
             copy = copy.nextNode
             return tail(copy)
         }
-    }
+    };
 
     const head = () => {    // returns the first node in the list
         return newNode
-    }
+    };
+    
+    const size = (copy = newNode, count = 0) => {    // returns the total number of nodes in the list
+        
+        if (copy === newNode) {
+            let copy = newNode
+        } 
+        
+        if ( copy.nextNode === null ) {
+            count++
+            return count
+        } else {
+            count++
+            copy = copy.nextNode
+            return size(copy, count)
+        }
+    };
+
+    const at = (index, copy = newNode) => {     // returns the node at the given index
+
+        if (copy === newNode) {
+            let copy = newNode
+        } 
+
+        if ( index === 0 ) {
+            return copy
+        } else {
+            copy = copy.nextNode
+            return at(index - 1, copy)
+        }
+
+    };
+
+    const find = (value) => {   //  returns the index of the node containing value, or null if not found.
+
+
+    } 
+
 
     const log = () => console.log(newNode);
-        
-    return { append, log, tail, head, prepend, pop, newNode };
+  
 
+    // const contains = (value) => {} // returns true if the passed in value is in the list and otherwise returns false.
+    // const toString = () => {} //  represents your LinkedList objects as strings, so you can print them out and preview them in the console.
     
-    // const size = () => {}
-    // const tail = () => {}
-    // const at = (index) => {}
-    // 
-    // const contains = (value) => {}
-    // const find = (value) => {}
-    // const toString = () => {}
-    
+    return { append, log, tail, head, prepend, pop, size, at, find, toString, newNode };
 };
 
 const node = (value = null, nextNode = null) => {
     return { value, nextNode }
-}
+};
 
 
 const newList = LinkedList();
-
-//newList.append(42)
-//newList.append(12)
-
-//console.log(newList.newNode)
-//newList.append(newNode.value)    
-
-
-
