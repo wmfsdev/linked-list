@@ -90,19 +90,65 @@ const LinkedList = () => {
 
     };
 
-    const find = (value) => {   //  returns the index of the node containing value, or null if not found.
+    const find = (value, index = 0, copy = newNode) => {   //  returns the index of the node containing value, or null if not found.
 
+        if (copy === newNode) {
+            let copy = newNode
+        } 
 
+        if ( copy.nextNode === null && copy.value !== value ) {
+            return null
+        }
+
+        if ( copy.value === value ) {
+            index++
+            return copy
+        } else {
+            index++
+            copy = copy.nextNode
+            return find(value, index, copy)
+        }
     } 
 
 
     const log = () => console.log(newNode);
   
+    const contains = (value, copy = newNode) => {   // returns true if the passed in value is in the list and otherwise returns false.
 
-    // const contains = (value) => {} // returns true if the passed in value is in the list and otherwise returns false.
-    // const toString = () => {} //  represents your LinkedList objects as strings, so you can print them out and preview them in the console.
-    
-    return { append, log, tail, head, prepend, pop, size, at, find, toString, newNode };
+        if (copy === newNode) {
+            let copy = newNode
+        }
+
+        if (copy.nextNode === null && copy.value !== value) {
+            return false
+        }
+
+        if (copy.value === value) {
+            return true
+        } else {
+            copy = copy.nextNode
+            return contains(value, copy)
+        }
+
+    } 
+
+    const toString = (concat = "", copy = newNode) => {    //  represents your LinkedList objects as strings, so you can print them out and preview them in the console.
+
+        if (copy === newNode) {
+            let copy = newNode
+        }
+
+        if (copy.nextNode === null) {
+            return concat.concat(` ( ${copy.value} ) -> null `)
+        } else {
+            stringValue = copy.value.toString()
+            concat = concat.concat(` ( ${stringValue} ) - >`)
+            copy = copy.nextNode
+            return toString(concat, copy)
+        }
+    }
+
+    return { append, log, tail, head, prepend, pop, size, at, find, contains, toString, newNode };
 };
 
 const node = (value = null, nextNode = null) => {
